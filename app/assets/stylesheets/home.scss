@@ -1,0 +1,52 @@
+// Place all the styles related to the Home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "spectre";
+
+.navbar {
+  height: 10vh;
+  box-shadow:1px 1px 8px #888888;
+  //TODO
+  //background-color: rgb(51, 89, 223);
+  //color: rgb(255, 255, 255) !important;
+  padding: 10px;
+  position: relative;
+  top: 0;
+  font-size: 2vmin;
+
+  &__left {
+    a {
+      img {
+        width: 15vw;
+        height: 6vh;
+      }
+    }
+    p {
+      position: absolute;
+      top: 30%;
+    }
+  }
+
+  &__center {
+    position: absolute;
+    top: 30%;
+    left: 35%;
+  }
+
+  &__right {
+    a {
+      figure {
+        background-color: rgb(188, 188, 188);
+        position: absolute;
+        top: 10%;
+        right: 10%;
+      }
+    }
+    a:first-of-type {
+      position: absolute;
+      top: 30%;
+      right: 20%;
+    }
+  }
+}
