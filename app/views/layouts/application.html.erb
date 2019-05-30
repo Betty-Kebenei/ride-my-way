@@ -10,6 +10,31 @@
   </head>
 
   <body>
+    <header class="navbar">
+      <section class="navbar__left">
+        <a href="/" class="btn btn-link">
+          <%= image_tag('logo.png', alt: 'logo') %>
+          <p class="btn btn-link">Ride My Way</p>
+        </a>
+      </section>
+      <section class="navbar__center">
+        <a href="/offers" class="btn btn-link">Offers</a>
+        <a href="/requests" class="btn btn-link">Requests</a>
+        </ul>
+      </section>
+      <section class="navbar__right">
+        <a href="/my_offers_requests" class="btn btn-link">My Offers/Requests</a>
+        <a href="/#" class="btn btn-link">
+          <figure class="avatar avatar-xl" data-initial="YZ">
+            <!--        TODO-->
+            <!--        <img src="user pic" alt="user-image">-->
+          </figure>
+          <!--      <i class="icon-arrow-down"></i>-->
+          <!--      TODO-->
+          <p>Logout</p>
+        </a>
+      </section>
+    </header>
     <%= yield %>
   </body>
 </html>
