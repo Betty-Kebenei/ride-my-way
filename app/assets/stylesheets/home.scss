@@ -50,3 +50,45 @@
     }
   }
 }
+
+.content {
+  width: 80%;
+  margin: auto;
+}
+
+.home {
+  padding: 50px 20px 20px;
+  text-align: center;
+  position: relative;
+
+  h1 {
+    font-size: x-large;
+  }
+
+  &__image {
+    min-height: 25vh;
+    img {
+      width: 35vw;
+      height: 20vh;
+      position: absolute;
+      left: 30%;
+      -webkit-animation: cars 3s linear 1s infinite;
+      animation: cars 3s linear 1s infinite;
+    }
+
+    @keyframes cars {
+      from {
+        left: 10%;
+      }
+      to {
+        left: 50%;
+      }
+    }
+  }
+
+  &__content {
+    button {
+      width: 130px;
+    }
+  }
+}
