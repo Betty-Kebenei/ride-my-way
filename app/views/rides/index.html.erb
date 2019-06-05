@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Rides</h1>
+
+<%= link_to 'Add Ride Offer', new_ride_path('offer') %>
+<%= link_to 'Add Ride Request', new_ride_path('request') %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Origin</th>
+      <th>Destination</th>
+      <th>Take off</th>
+      <th>Number of people</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rides.each do |ride| %>
+      <tr>
+        <td><%= ride.ride_type %></td>
+        <td><%= ride.origin %></td>
+        <td><%= ride.destination %></td>
+        <td><%= ride.take_off %></td>
+        <td><%= ride.number_of_people %></td>
+        <td><%= ride.user %></td>
+        <td><%= link_to 'Show', ride %></td>
+        <td><%= link_to 'Edit', edit_ride_path(ride) %></td>
+        <td><%= link_to 'Destroy', ride, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
