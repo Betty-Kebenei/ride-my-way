@@ -51,6 +51,21 @@
   }
 }
 
+.flash {
+  text-align: center;
+  width: 60%;
+  margin: auto;
+  line-height: 50px;
+
+  &__notice {
+    background-color: #32CD32;
+  }
+
+  &__error {
+    background-color: #Ff4500;
+  }
+}
+
 .content {
   width: 80%;
   margin: auto;
