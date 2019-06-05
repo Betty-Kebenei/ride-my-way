@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :rides
+
   EMAIL_REGEXP = /\A([\w+\-].?)+@andela+(\.[a-z]+)*\.[a-z]+\z/
 
   validates :email, uniqueness: { message: I18n.t("errors.user.unique") },

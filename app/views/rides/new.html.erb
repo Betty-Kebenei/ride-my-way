@@ -1,0 +1,9 @@
+<% if request.params[:format] == 'offer' %>
+  <h1>New Ride Offer</h1>
+<% else %>
+  <h1>New Ride Request</h1>
+<% end %>
+
+<%= render 'form', ride: @ride %>
+
+<%= link_to 'Back', rides_path %>
