@@ -5,7 +5,13 @@
   </section>
   <section class="home__content">
     <p>Kindly view available offers/requests before adding an offer/request</p>
-    <a href="/rides"><button class="btn btn-primary">View Offers</button></a>
-    <a href="/rides"><button class="btn btn-primary">View Requests</button></a>
+<!--    <a href="/rides"><button class="btn btn-primary">View Offers</button></a>-->
+<!--    <a href="/rides"><button class="btn btn-primary">View Requests</button></a>-->
+    <button class="btn btn-primary">
+      <%= link_to 'Offers', rides_path('offer') %>
+    </button>
+    <button class="btn btn-primary">
+      <%= link_to 'Requests', rides_path('request') %>
+    </button>
   </section>
 </div>

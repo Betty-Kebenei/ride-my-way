@@ -33,6 +33,10 @@
     </div>
   <% end %>
 
+  <div class="field" style="visibility: hidden">
+    <%= form.text_field :ride_type, :input_html => {:value => request.params[:format]} %>
+  </div>
+
   <div class="actions">
     <%= form.submit "Create" %>
   </div>

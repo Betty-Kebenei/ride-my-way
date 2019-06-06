@@ -5,7 +5,7 @@ class RidesController < ApplicationController
   # GET /rides
   # GET /rides.json
   def index
-    @rides = Ride.all
+    @rides = Ride.where(ride_type: request.params[:format])
   end
 
   # GET /rides/1
@@ -27,17 +27,11 @@ class RidesController < ApplicationController
   def create
     @ride = Ride.new(ride_params)
     @ride.user_id = session[:user_id]
-    if request.params[:format] == 'offer'
-      @ride.ride_type = 'offer'
-      @create_message = 'Offer ride was successfully created.'
-    else
-      @ride.ride_type = 'request'
-      @create_message = 'Request ride was successfully created.'
-    end
+    puts @ride
 
     respond_to do |format|
       if @ride.save
-        format.html { redirect_to @ride, notice: @create_message }
+        format.html { redirect_to @ride, notice: 'Ride was successfully created.' }
         format.json { render :show, status: :created, location: @ride }
       else
         format.html { render :new }
@@ -81,6 +75,6 @@ class RidesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ride_params
-      params.require(:ride).permit(:type, :origin, :destination, :take_off, :number_of_people, :user_id)
+      params.require(:ride).permit(:ride_type, :origin, :destination, :take_off, :number_of_people, :user_id)
     end
 end
