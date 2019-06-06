@@ -1,0 +1,114 @@
+// Place all the styles related to the Home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "spectre";
+
+.navbar {
+  height: 10vh;
+  box-shadow:1px 1px 8px #888888;
+  //TODO
+  //background-color: rgb(51, 89, 223);
+  //color: rgb(255, 255, 255) !important;
+  padding: 10px;
+  position: relative;
+  top: 0;
+  font-size: 2vmin;
+
+  &__left {
+    a {
+      img {
+        width: 15vw;
+        height: 6vh;
+      }
+    }
+    p {
+      position: absolute;
+      top: 30%;
+    }
+  }
+
+  &__center {
+    position: absolute;
+    top: 30%;
+    left: 35%;
+  }
+
+  &__right {
+    a {
+      figure {
+        background-color: rgb(188, 188, 188);
+        position: absolute;
+        top: 10%;
+        right: 10%;
+      }
+    }
+    a:first-of-type {
+      position: absolute;
+      top: 30%;
+      right: 20%;
+    }
+  }
+}
+
+.flash {
+  text-align: center;
+  width: 60%;
+  margin: auto;
+  line-height: 50px;
+
+  &__notice {
+    background-color: #32CD32;
+  }
+
+  &__error {
+    background-color: #Ff4500;
+  }
+}
+
+.content {
+  width: 80%;
+  margin: auto;
+}
+
+.home {
+  padding: 50px 20px 20px;
+  text-align: center;
+  position: relative;
+
+  h1 {
+    font-size: x-large;
+  }
+
+  &__image {
+    min-height: 25vh;
+    img {
+      width: 35vw;
+      height: 20vh;
+      position: absolute;
+      left: 30%;
+      -webkit-animation: cars 3s linear 1s infinite;
+      animation: cars 3s linear 1s infinite;
+    }
+
+    @keyframes cars {
+      from {
+        left: 10%;
+      }
+      to {
+        left: 50%;
+      }
+    }
+  }
+
+  &__content {
+    .button {
+      width: 130px;
+
+      a {
+        color: white;
+        text-decoration: none;
+      }
+    }
+  }
+}

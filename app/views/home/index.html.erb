@@ -1,0 +1,11 @@
+<div class="home">
+  <h1>Welcome to Andela Ride My Way Application</h1>
+  <section class="home__image">
+    <%= image_tag('car.png', alt: 'car image') %>
+  </section>
+  <section class="home__content">
+    <p>Kindly view available offers/requests before adding an offer/request</p>
+    <%= link_to 'Offers', rides_path('offer'), class: 'button btn btn-primary' %>
+    <%= link_to 'Requests', rides_path('request'), class: 'button btn btn-primary' %>
+  </section>
+</div>

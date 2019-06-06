@@ -1,0 +1,43 @@
+<%= form_with(model: ride, local: true) do |form| %>
+  <% if ride.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ride.errors.count, "error") %> prohibited this ride from being saved:</h2>
+
+      <ul>
+      <% ride.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :origin %>
+    <%= form.text_field :origin %>
+  </div>
+
+  <div class="field">
+    <%= form.label :destination %>
+    <%= form.text_field :destination %>
+  </div>
+
+  <div class="field">
+    <%= form.label :take_off %>
+    <%= form.datetime_select :take_off %>
+  </div>
+
+  <% if request.params[:format] == 'offer' %>
+    <div class="field">
+      <%= form.label :number_of_people %>
+      <%= form.number_field :number_of_people %>
+    </div>
+  <% end %>
+
+  <div class="field" style="visibility: hidden">
+    <%= form.text_field :ride_type, :input_html => {:value => request.params[:format]} %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Create" %>
+  </div>
+<% end %>
