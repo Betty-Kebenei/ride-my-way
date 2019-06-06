@@ -1,7 +1,7 @@
 class CreateRides < ActiveRecord::Migration[5.2]
   def change
     create_table :rides do |t|
-      t.string :type
+      t.string :ride_type
       t.string :origin
       t.string :destination
       t.datetime :take_off
