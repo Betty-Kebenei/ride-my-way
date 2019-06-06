@@ -1,6 +1,5 @@
 class RidesController < ApplicationController
   before_action :set_ride, only: [:show, :edit, :update, :destroy]
-  before_action :set_user, only: [:create]
 
   # GET /rides
   # GET /rides.json
@@ -64,10 +63,6 @@ class RidesController < ApplicationController
   end
 
   private
-    def set_user
-      @user = User.find(session[:user_id])
-    end
-
     def set_ride
       @ride = Ride.find(params[:id])
     end
