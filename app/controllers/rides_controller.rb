@@ -27,7 +27,6 @@ class RidesController < ApplicationController
   def create
     @ride = Ride.new(ride_params)
     @ride.user_id = session[:user_id]
-    puts @ride
 
     respond_to do |format|
       if @ride.save

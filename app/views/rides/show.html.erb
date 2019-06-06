@@ -1,8 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Type:</strong>
-  <%= @ride.ride_type %>
+  <strong>Ride <%= @ride.ride_type %></strong>
 </p>
 
 <p>
@@ -20,15 +19,12 @@
   <%= @ride.take_off %>
 </p>
 
-<p>
-  <strong>Number of people:</strong>
-  <%= @ride.number_of_people %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @ride.user %>
-</p>
+<% if @ride.number_of_people %>
+  <p>
+    <strong>Number of people:</strong>
+    <%= @ride.number_of_people %>
+  </p>
+<% end %>
 
 <%= link_to 'Edit', edit_ride_path(@ride) %> |
 <%= link_to 'Back', rides_path %>
