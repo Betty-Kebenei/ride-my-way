@@ -19,22 +19,17 @@
           </a>
         </section>
         <section class="navbar__center">
-          <p class="btn btn-link">
-            <%= link_to 'Offers', rides_path('offer') %>
-          </p>
-          <p class="btn btn-link">
-            <%= link_to 'Requests', rides_path('request') %>
-          </p>
+          <%= link_to 'Offers', rides_path('offer'), class: 'btn btn-link' %>
+          <%= link_to 'Requests', rides_path('request'), class: 'btn btn-link' %>
         </section>
         <section class="navbar__right">
           <a href="/my_offers_requests" class="btn btn-link">My Offers/Requests</a>
           <a href="/#" class="btn btn-link">
             <figure class="avatar avatar-xl" data-initial="YZ">
-              <!--        TODO-->
-              <!--        <img src="user pic" alt="user-image">-->
+              <img src="<%= current_user.image_url %>" alt="user-image">
             </figure>
-            <!--      <i class="icon-arrow-down"></i>-->
-            <!--      TODO-->
+<!--            TODO-->
+<!--            <i class="icon-arrow-down"></i>-->
             <%= link_to "Logout", signout_path, id: "sign_out" %>
           </a>
         </section>
