@@ -104,6 +104,11 @@
   &__content {
     button {
       width: 130px;
+
+      a {
+        color: white;
+        text-decoration: none;
+      }
     }
   }
 }

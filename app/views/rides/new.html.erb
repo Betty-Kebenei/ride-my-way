@@ -4,6 +4,7 @@
   <h1>New Ride Request</h1>
 <% end %>
 
+<% @ride.ride_type = request.params[:format] %>
 <%= render 'form', ride: @ride %>
 
 <%= link_to 'Back', rides_path %>

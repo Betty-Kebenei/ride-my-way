@@ -1,39 +1,37 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Rides</h1>
+<% if request.params[:format] == 'offer' %>
+  <h1>Ride Offers</h1>
+<% else %>
+  <h1>Ride Requests</h1>
+<% end %>
 
-<%= link_to 'Add Ride Offer', new_ride_path('offer') %>
-<%= link_to 'Add Ride Request', new_ride_path('request') %>
+<p>
+  <%= link_to 'Add Ride Offer', new_ride_path('offer') %>
+  <%= link_to 'Add Ride Request', new_ride_path('request') %>
+</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Origin</th>
-      <th>Destination</th>
-      <th>Take off</th>
-      <th>Number of people</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @rides.each do |ride| %>
-      <tr>
-        <td><%= ride.ride_type %></td>
-        <td><%= ride.origin %></td>
-        <td><%= ride.destination %></td>
-        <td><%= ride.take_off %></td>
-        <td><%= ride.number_of_people %></td>
-        <td><%= ride.user %></td>
-        <td><%= link_to 'Show', ride %></td>
-        <td><%= link_to 'Edit', edit_ride_path(ride) %></td>
-        <td><%= link_to 'Destroy', ride, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+<% @rides.each do |ride| %>
+  <div class="columns">
+    <div class="column col-5">
+      <figure class="avatar avatar-xl">
+        <img src="<%= ride.user.image_url %>" alt="user-image">
+      </figure>
+      <%= ride.user.name %>
+    </div>
+    <div class="column col-6">
+      <span><b>Ride Offer Details</b></span><br>
+      <span><i>Origin:</i> <%= ride.origin %></span><br>
+      <span><i>Destination:</i> <%= ride.destination %></span><br>
+      <span><i>Take Off:</i> <%= ride.take_off %></span><br>
+      <span><i>Number of available seats:</i> <%= ride.number_of_people %></span><br>
+    </div>
+    <div class="column col-1">
+      <%= link_to 'Show', ride %>
+      <%= link_to 'Edit', edit_ride_path(ride) %>
+      <%= link_to 'Cancel', ride, method: :delete, data: {confirm: 'Are you sure?'} %>
+    </div>
+  </div>
+  <hr>
+<% end %>
 

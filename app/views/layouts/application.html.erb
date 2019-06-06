@@ -19,8 +19,12 @@
           </a>
         </section>
         <section class="navbar__center">
-          <a href="/rides" class="btn btn-link">Offers</a>
-          <a href="/rides" class="btn btn-link">Requests</a>
+          <p class="btn btn-link">
+            <%= link_to 'Offers', rides_path('offer') %>
+          </p>
+          <p class="btn btn-link">
+            <%= link_to 'Requests', rides_path('request') %>
+          </p>
         </section>
         <section class="navbar__right">
           <a href="/my_offers_requests" class="btn btn-link">My Offers/Requests</a>
