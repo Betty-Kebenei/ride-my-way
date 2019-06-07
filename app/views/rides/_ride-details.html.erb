@@ -1,0 +1,10 @@
+<span><b>Ride <%= ride.ride_type %> details</b></span><br>
+<span><i>Origin:</i> <%= ride.origin %></span><br>
+<span><i>Destination:</i> <%= ride.destination %></span><br>
+<span><i>Take Off:</i> <%= ride.take_off %></span><br>
+<% if ride.ride_type == 'offer' %>
+  <span>
+    <i>Number of available seats:</i>
+    <%= ride.number_of_people %>
+  </span><br>
+<% end %>

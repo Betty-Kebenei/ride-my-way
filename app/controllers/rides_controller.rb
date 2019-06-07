@@ -4,7 +4,12 @@ class RidesController < ApplicationController
   # GET /rides
   # GET /rides.json
   def index
-    @rides = Ride.where(ride_type: request.params[:format])
+    @rides =
+      if request.params[:format]
+        Ride.where(ride_type: request.params[:format])
+      else
+        Ride.where(user_id: session[:user_id])
+      end
   end
 
   # GET /rides/1
@@ -41,6 +46,17 @@ class RidesController < ApplicationController
   # PATCH/PUT /rides/1
   # PATCH/PUT /rides/1.json
   def update
+    if @ride.user.id != current_user.id
+      params[:ride] = {
+          :ride_type => @ride.ride_type,
+          :origin => @ride.origin,
+          :destination => @ride.destination,
+          :take_off => @ride.take_off,
+          :number_of_people => @ride.number_of_people,
+          :respondents => @ride.respondents.push(current_user.name),
+          :user_id => @ride.user.id
+      }
+    end
     respond_to do |format|
       if @ride.update(ride_params)
         format.html { redirect_to @ride, notice: 'Ride was successfully updated.' }
@@ -69,6 +85,6 @@ class RidesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ride_params
-      params.require(:ride).permit(:ride_type, :origin, :destination, :take_off, :number_of_people, :user_id)
+      params.require(:ride).permit(:ride_type, :origin, :destination, :take_off, :number_of_people, :respondents, :user_id)
     end
 end
