@@ -23,7 +23,8 @@
           <%= link_to 'Requests', rides_path('request'), class: 'btn btn-link' %>
         </section>
         <section class="navbar__right">
-          <a href="/my_offers_requests" class="btn btn-link">My Offers/Requests</a>
+          <%= link_to 'My Rides', rides_path, class: 'btn btn-link' %>
+
           <a href="/#" class="btn btn-link">
             <figure class="avatar avatar-xl" data-initial="YZ">
               <img src="<%= current_user.image_url %>" alt="user-image">
