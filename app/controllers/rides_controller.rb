@@ -52,7 +52,7 @@ class RidesController < ApplicationController
           :origin => @ride.origin,
           :destination => @ride.destination,
           :take_off => @ride.take_off,
-          :number_of_people => @ride.number_of_people,
+          :number_of_people => @ride.number_of_people - 1,
           :respondents => @ride.respondents.push(current_user.name),
           :user_id => @ride.user.id
       }

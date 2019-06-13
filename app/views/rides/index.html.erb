@@ -24,11 +24,26 @@
         <%= render 'ride-details', ride: ride %>
       </div>
       <div class="column col-1">
-        <% if ride.user.id != current_user.id %>
-          <%= button_to 'Accept',
-                        ride,
-                        method: :patch,
-                        class: 'btn btn-success' %>
+        <% if (ride.user.id != current_user.id) && !(ride.respondents.include?(current_user.name)) %>
+          <% if ride.ride_type == 'offer' %>
+            <% if ride.number_of_people > 0  %>
+              <%= button_to 'Accept',
+                            ride,
+                            method: :patch,
+                            class: 'btn btn-success' %>
+            <% else %>
+              <p>Ride already full.</p>
+            <% end %>
+          <% else %>
+            <% if ride.respondents.length < 1 %>
+              <%= button_to 'Accept',
+                            ride,
+                            method: :patch,
+                            class: 'btn btn-success' %>
+            <% else %>
+              <p>User already got a ride.</p>
+            <% end %>
+          <% end %>
         <% end %>
       </div>
     </div>
