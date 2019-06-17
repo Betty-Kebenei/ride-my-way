@@ -4,6 +4,7 @@ class RidesController < ApplicationController
   # GET /rides
   # GET /rides.json
   def index
+    RidesCleanupJob.perform_later()
     @rides =
       if request.params[:format]
         Ride.where(ride_type: request.params[:format])
