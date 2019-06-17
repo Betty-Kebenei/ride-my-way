@@ -18,6 +18,7 @@ gem 'spectre_scss'
 # gem 'sprockets-rails', :require => 'sprockets/railtie'
 # gem 'jquery-rails'
 gem 'omniauth-google-oauth2'
+gem 'will_paginate'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

@@ -10,7 +10,7 @@ class RidesController < ApplicationController
         Ride.where(ride_type: request.params[:format])
       else
         Ride.where(user_id: session[:user_id])
-      end
+      end.paginate(page: params[:page], per_page: 4)
   end
 
   # GET /rides/1
