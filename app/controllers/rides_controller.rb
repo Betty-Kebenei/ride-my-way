@@ -9,7 +9,7 @@ class RidesController < ApplicationController
       if request.params[:format]
         Ride.where(ride_type: request.params[:format])
       else
-        Ride.where(user_id: session[:user_id])
+        Ride.where(user_id: session[:user_id]) and Ride.where(respondents: [current_user.name])
       end.paginate(page: params[:page], per_page: 4)
   end
 
@@ -48,15 +48,21 @@ class RidesController < ApplicationController
   # PATCH/PUT /rides/1.json
   def update
     if @ride.user.id != current_user.id
+      @respondents = if  @ride.respondents.include?(current_user.name)
+                       @ride.respondents.delete(current_user.name)
+                     else
+                       @ride.respondents.push(current_user.name)
+                     end
       params[:ride] = {
           :ride_type => @ride.ride_type,
           :origin => @ride.origin,
           :destination => @ride.destination,
           :take_off => @ride.take_off,
           :number_of_people => @ride.number_of_people - 1,
-          :respondents => @ride.respondents.push(current_user.name),
+          :respondents => @respondents,
           :user_id => @ride.user.id
       }
+
     end
     respond_to do |format|
       if @ride.update(ride_params)

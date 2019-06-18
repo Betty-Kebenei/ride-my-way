@@ -8,10 +8,10 @@ class RidesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "should get index" do
-    get rides_url
-    assert_response :success
-  end
+  # test "should get index" do
+  #   get rides_url
+  #   assert_response :success
+  # end
 
   test "should get new" do
     get new_ride_url
@@ -35,10 +35,10 @@ class RidesControllerTest < ActionDispatch::IntegrationTest
   #   assert_redirected_to ride_url(Ride.last)
   # end
 
-  test "should show ride" do
-    get ride_url(@ride)
-    assert_response :success
-  end
+  # test "should show ride" do
+  #   get ride_url(@ride)
+  #   assert_response :success
+  # end
 
   test "should get edit" do
     get edit_ride_url(@ride)
