@@ -1,4 +1,5 @@
 class RidesController < ApplicationController
+  skip_before_action :require_logout
   before_action :set_ride, only: [:show, :edit, :update, :destroy]
 
   # GET /rides
