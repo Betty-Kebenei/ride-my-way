@@ -7,9 +7,6 @@
 .navbar {
   height: 10vh;
   box-shadow:1px 1px 8px #888888;
-  //TODO
-  //background-color: rgb(51, 89, 223);
-  //color: rgb(255, 255, 255) !important;
   padding: 10px;
   position: relative;
   top: 0;
@@ -48,6 +45,13 @@
       top: 30%;
       right: 20%;
     }
+
+    a:last-of-type {
+      position: absolute;
+      top: 30%;
+      right: 0%;
+    }
+
   }
 }
 

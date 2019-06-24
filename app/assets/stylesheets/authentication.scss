@@ -2,7 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-//div {
-//  text-align: center;
-//  min-height: 20vh;
-//}
+.outer {
+  text-align: center;
+  background-color: #e5e5e5;
+  box-shadow:1px 1px 8px #888888;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20%;
+
+  &__inner {
+    padding:50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
