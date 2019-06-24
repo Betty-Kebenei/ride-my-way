@@ -1,0 +1,6 @@
+<span><b>Ride acceptance details</b></span><br>
+<span><i>Owner:</i> <%= ride.user.name %></span><br>
+<span><i>Ride Type:</i> <%= ride.ride_type %></span><br>
+<span><i>Origin:</i> <%= ride.origin %></span><br>
+<span><i>Destination:</i> <%= ride.destination %></span><br>
+<span><i>Take Off:</i> <%= ride.take_off.localtime.strftime '%Y-%m-%d %H:%M:%S' %></span><br>

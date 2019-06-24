@@ -4,7 +4,15 @@ class RidesController < ApplicationController
   # GET /rides
   # GET /rides.json
   def index
-    @rides = Ride.where(ride_type: request.params[:format])
+    RidesCleanupJob.perform_later()
+    @rides =
+      if request.params[:format]
+        Ride.where(ride_type: request.params[:format])
+      elsif  Ride.where(respondents: [current_user.name]).length > 0
+        Ride.where(user_id: current_user.id) and Ride.where(respondents: [current_user.name])
+      else
+        Ride.where(user_id: current_user.id)
+      end.paginate(page: params[:page], per_page: 4)
   end
 
   # GET /rides/1
@@ -25,14 +33,14 @@ class RidesController < ApplicationController
   # POST /rides.json
   def create
     @ride = Ride.new(ride_params)
-    @ride.user_id = session[:user_id]
+    @ride.user_id = current_user.id
 
     respond_to do |format|
       if @ride.save
         format.html { redirect_to @ride, notice: 'Ride was successfully created.' }
         format.json { render :show, status: :created, location: @ride }
       else
-        format.html { render :new }
+        format.html { render :new,  error: 'All fields are required.' }
         format.json { render json: @ride.errors, status: :unprocessable_entity }
       end
     end
@@ -41,6 +49,23 @@ class RidesController < ApplicationController
   # PATCH/PUT /rides/1
   # PATCH/PUT /rides/1.json
   def update
+    if @ride.user.id != current_user.id
+      @respondents = if  @ride.respondents.include?(current_user.name)
+                       @ride.respondents.delete(current_user.name)
+                     else
+                       @ride.respondents.push(current_user.name)
+                     end
+      params[:ride] = {
+          :ride_type => @ride.ride_type,
+          :origin => @ride.origin,
+          :destination => @ride.destination,
+          :take_off => @ride.take_off,
+          :number_of_people => @ride.number_of_people - 1,
+          :respondents => @respondents,
+          :user_id => @ride.user.id
+      }
+
+    end
     respond_to do |format|
       if @ride.update(ride_params)
         format.html { redirect_to @ride, notice: 'Ride was successfully updated.' }
@@ -69,6 +94,6 @@ class RidesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ride_params
-      params.require(:ride).permit(:ride_type, :origin, :destination, :take_off, :number_of_people, :user_id)
+      params.require(:ride).permit(:ride_type, :origin, :destination, :take_off, :number_of_people, :respondents, :user_id)
     end
 end

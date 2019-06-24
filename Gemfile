@@ -12,12 +12,12 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'coveralls', require: false
 gem 'spectre_scss'
 # gem 'bootstrap', '~> 4.3.1'
 # gem 'sprockets-rails', :require => 'sprockets/railtie'
 # gem 'jquery-rails'
 gem 'omniauth-google-oauth2'
+gem 'will_paginate'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -28,6 +28,7 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'rspec-rails'
 end
 
 group :test do
@@ -35,7 +36,12 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
-  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'simplecov', require: false, group: :test
+  gem 'rails-controller-testing'
+  gem 'factory_girl_rails', :require => false
+  gem 'database_cleaner'
+  gem 'faker', :require => false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

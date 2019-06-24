@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<% if request.params[:format] == 'offer' %>
-  <h1>Ride Offers</h1>
+<% if request.params[:format] %>
+  <h1>Ride <%= request.params[:format] %>s</h1>
 <% else %>
-  <h1>Ride Requests</h1>
+  <h1>My rides</h1>
 <% end %>
 
 <p>
@@ -12,37 +12,82 @@
 </p>
 
 <% @rides.each do |ride| %>
-  <div class="columns">
-    <div class="column col-5">
-      <figure class="avatar avatar-xl">
-        <img src="<%= ride.user.image_url %>" alt="user-image">
-      </figure>
-      <%= ride.user.name %>
+  <% if request.params[:format] %>
+    <div class="columns">
+      <div class="column col-5">
+        <figure class="avatar avatar-xl">
+          <img src="<%= ride.user.image_url %>" alt="user-image">
+        </figure>
+        <%= ride.user.name %>
+      </div>
+      <div class="column col-6">
+        <%= render 'ride-details', ride: ride %>
+      </div>
+      <div class="column col-1">
+        <% if (ride.user.id != current_user.id) && !(ride.respondents.include?(current_user.name)) %>
+          <% if ride.ride_type == 'offer' %>
+            <% if ride.number_of_people > 0  %>
+              <%= button_to 'Accept',
+                            ride,
+                            method: :patch,
+                            class: 'btn btn-success' %>
+            <% else %>
+              <p>Ride already full.</p>
+            <% end %>
+          <% else %>
+            <% if ride.respondents.length < 1 %>
+              <%= button_to 'Accept',
+                            ride,
+                            method: :patch,
+                            class: 'btn btn-success' %>
+            <% else %>
+              <p>User already got a ride.</p>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
     </div>
-    <div class="column col-6">
-      <% if request.params[:format] == 'offer' %>
-        <span><b>Ride Offer Details</b></span><br>
-      <% else %>
-        <span><b>Ride Request Details</b></span><br>
-      <% end %>
-      <span><i>Origin:</i> <%= ride.origin %></span><br>
-      <span><i>Destination:</i> <%= ride.destination %></span><br>
-      <span><i>Take Off:</i> <%= ride.take_off %></span><br>
-      <% if request.params[:format] == 'offer' %>
-        <span>
-          <i>Number of available seats:</i>
-          <%= ride.number_of_people %>
-        </span><br>
-      <% end %>
-    </div>
-    <div class="column col-1">
-      <%= button_to 'Accept', edit_ride_path(ride), class: 'btn btn-success' %>
-<!--      TODO-->
-      <%#= link_to 'Show', ride %>
-      <%#= link_to 'Edit', edit_ride_path(ride) %>
-      <%#= link_to 'Cancel', ride, method: :delete, data: {confirm: 'Are you sure?'} %>
-    </div>
-  </div>
+  <% else %>
+    <% if ride.user.id == current_user.id %>
+      <div class="columns">
+        <div class="column col-6">
+          <%= render 'ride-details', ride: ride %>
+          <br>
+          <%= link_to 'Edit', edit_ride_path(ride) %>
+          <%= link_to 'Cancel',
+                      ride,
+                      method: :delete,
+                      data: {confirm: 'Are you sure you want this ride deleted?'}%>
+        </div>
+        <div class="column col-6">
+          <span><b>Status</b></span><br>
+          <% if ride.respondents.length > 0 %>
+            <p>
+              Response from:<br>
+              <% ride.respondents.each do |respondent|  %>
+                - <i><%= respondent %></i> <br>
+              <% end %>
+            </p>
+          <% else %>
+            <p><i>Pending...</i></p>
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+      <div class="columns">
+        <div class="column col-6">
+          <%= render 'ride-acceptance-details', ride: ride %>
+          <br>
+          <%= link_to 'Cancel',
+                        ride,
+                        method: :patch %>
+        </div>
+        <div class="column col-6">
+
+        </div>
+      </div>
+    <% end %>
+  <% end %>
   <hr>
 <% end %>
-
+<%= will_paginate @rides %>
