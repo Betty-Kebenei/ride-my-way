@@ -10,14 +10,14 @@
   </head>
 
   <body style="margin: 0px;">
-    <% if current_user %>
-      <header class="navbar">
-        <section class="navbar__left">
-          <a href="/" class="btn btn-link">
-            <%= image_tag('logo.png', alt: 'logo') %>
-            <p class="btn btn-link">Ride My Way</p>
-          </a>
-        </section>
+    <header class="navbar">
+      <section class="navbar__left">
+        <a href="/" class="btn btn-link">
+          <%= image_tag('logo.png', alt: 'logo') %>
+          <p class="btn btn-link">Ride My Way</p>
+        </a>
+      </section>
+      <% if current_user %>
         <section class="navbar__center">
           <%= link_to 'Offers', rides_path('offer'), class: 'btn btn-link' %>
           <%= link_to 'Requests', rides_path('request'), class: 'btn btn-link' %>
@@ -32,8 +32,8 @@
           </a>
           <%= link_to "Logout", signout_path, id: "sign_out", class: 'btn btn-link' %>
         </section>
-      </header>
-    <% end %>
+      <% end %>
+    </header>
     <div class="flash">
       <% if flash[:notice] %>
         <div class="flash__notice"><%= flash[:notice] %></div>
