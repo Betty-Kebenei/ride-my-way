@@ -9,7 +9,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body style="margin: 0px;">
     <% if current_user %>
       <header class="navbar">
         <section class="navbar__left">
@@ -29,10 +29,8 @@
             <figure class="avatar avatar-xl" data-initial="YZ">
               <img src="<%= current_user.image_url %>" alt="user-image">
             </figure>
-<!--            TODO-->
-<!--            <i class="icon-arrow-down"></i>-->
-            <%= link_to "Logout", signout_path, id: "sign_out" %>
           </a>
+          <%= link_to "Logout", signout_path, id: "sign_out", class: 'btn btn-link' %>
         </section>
       </header>
     <% end %>

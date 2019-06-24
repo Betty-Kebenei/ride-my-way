@@ -8,8 +8,10 @@ class RidesController < ApplicationController
     @rides =
       if request.params[:format]
         Ride.where(ride_type: request.params[:format])
-      else
+      elsif  Ride.where(respondents: [current_user.name]).length > 0
         Ride.where(user_id: current_user.id) and Ride.where(respondents: [current_user.name])
+      else
+        Ride.where(user_id: current_user.id)
       end.paginate(page: params[:page], per_page: 4)
   end
 
