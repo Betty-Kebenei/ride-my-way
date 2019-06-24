@@ -9,7 +9,7 @@ class RidesController < ApplicationController
       if request.params[:format]
         Ride.where(ride_type: request.params[:format])
       else
-        Ride.where(user_id: session[:user_id]) and Ride.where(respondents: [current_user.name])
+        Ride.where(user_id: current_user.id) and Ride.where(respondents: [current_user.name])
       end.paginate(page: params[:page], per_page: 4)
   end
 
@@ -31,14 +31,14 @@ class RidesController < ApplicationController
   # POST /rides.json
   def create
     @ride = Ride.new(ride_params)
-    @ride.user_id = session[:user_id]
+    @ride.user_id = current_user.id
 
     respond_to do |format|
       if @ride.save
         format.html { redirect_to @ride, notice: 'Ride was successfully created.' }
         format.json { render :show, status: :created, location: @ride }
       else
-        format.html { render :new }
+        format.html { render :new,  error: 'All fields are required.' }
         format.json { render json: @ride.errors, status: :unprocessable_entity }
       end
     end
