@@ -61,7 +61,7 @@ class RidesController < ApplicationController
           :origin => @ride.origin,
           :destination => @ride.destination,
           :take_off => @ride.take_off,
-          :number_of_people => @ride.number_of_people - 1,
+          :number_of_people => @ride.number_of_people ? @ride.number_of_people - 1 : 0,
           :respondents => @respondents,
           :user_id => @ride.user.id
       }

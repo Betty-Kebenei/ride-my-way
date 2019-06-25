@@ -16,7 +16,7 @@
 
 <p>
   <strong>Take off:</strong>
-  <%= @ride.take_off %>
+  <%= @ride.take_off.localtime.strftime '%Y-%m-%d %H:%M:%S' %>
 </p>
 
 <% if @ride.number_of_people %>
