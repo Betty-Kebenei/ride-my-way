@@ -8,17 +8,17 @@ RSpec.describe RidesController, type: :controller do
   context 'GET #index' do
     it 'returns a rides for the logged in user' do
       get :index
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
 
     it 'returns request rides' do
       get :index, params: {:format => 'request'}
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
 
     it 'returns offer rides' do
       get :index, params: {:format => 'offer'}
-      expect(response).to be_success
+      expect(response).to have_http_status(200)
     end
   end
 end
