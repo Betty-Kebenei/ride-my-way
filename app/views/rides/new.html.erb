@@ -1,5 +1,8 @@
-<%= link_to 'Back', rides_path, class: "new-ride" %>
+<div class="new-page">
+  <h1>New ride <%= request.params[:format] %></h1>
 
-<h1>New ride <%= request.params[:format] %></h1>
+  <%= render 'form', ride: @ride %>
 
-<%= render 'form', ride: @ride %>
+  <%= link_to 'Back', rides_path %>
+</div>
+

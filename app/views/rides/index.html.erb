@@ -1,17 +1,25 @@
-<p id="notice"><%= notice %></p>
+<div class="index">
+  <% if request.params[:format] %>
+    <h1>Ride <%= request.params[:format] %>s</h1>
+  <% else %>
+    <h1>My rides</h1>
+  <% end %>
 
-<% if request.params[:format] %>
-  <h1>Ride <%= request.params[:format] %>s</h1>
-<% else %>
-  <h1>My rides</h1>
+  <p>
+    <%= link_to 'Add Ride Offer', new_ride_path('offer'), class: 'button btn btn-primary' %>
+    <%= link_to 'Add Ride Request', new_ride_path('request'), class: 'button btn btn-primary' %>
+  </p>
+</div>
+
+<% if @rides.length === 0 %>
+  <div class="no-rides">
+    <p>Oops! There are no existing rides currently.</p>
+    <p>Feel free to add one.</p>
+  </div>
 <% end %>
 
-<p>
-  <%= link_to 'Add Ride Offer', new_ride_path('offer') %>
-  <%= link_to 'Add Ride Request', new_ride_path('request') %>
-</p>
-
 <% @rides.each do |ride| %>
+  <hr>
   <% if request.params[:format] %>
     <div class="columns">
       <div class="column col-5">
@@ -88,6 +96,5 @@
       </div>
     <% end %>
   <% end %>
-  <hr>
 <% end %>
 <%= will_paginate @rides %>

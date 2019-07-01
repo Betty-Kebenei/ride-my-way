@@ -34,13 +34,11 @@ end
 group :test do
   gem 'travis'
   gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
-  gem 'chromedriver-helper'
   gem 'rspec-rails'
   gem 'simplecov', require: false, group: :test
   gem 'coveralls', require: false
   gem 'rails-controller-testing'
-  gem 'factory_girl_rails', :require => false
+  gem 'factory_bot_rails', :require => false
   gem 'database_cleaner'
   gem 'faker', :require => false
 end
